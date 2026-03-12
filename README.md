@@ -1,69 +1,17 @@
-```markdown
 # Container Scheduler Simulator
 
-** Симулятор размещения контейнеров в вычислительном кластере**  
+Симулятор размещения контейнеров в кластере.
 
----
+## Алгоритмы
 
-##  О проекте
+- First Fit
+- Best Fit
+- Worst Fit
+- Genetic Algorithm
 
-Этот проект моделирует работу **kube-scheduler** (компонента Kubernetes, который отвечает за размещение подов на нодах кластера).
+## Запуск
 
-**Зачем это нужно?**
--  Для дипломной работы: исследование и сравнение алгоритмов упаковки
--  Для демонстрации навыков DevOps/SRE (Docker, K8s, CI/CD, мониторинг)
-
----
-
-##  Алгоритмы размещения
-
-Реализованы следующие алгоритмы:
-1) First Fit: Размещаем контейнер в первую подходящую ноду 
-2) Best Fit: Выбираем ноду, где остаётся меньше всего свободного места 
-3) First Fit Decreasing: Сортируем контейнеры по убыванию, затем First Fit 
-4) Genetic Algorithm: Эволюционный подход для приближённого решения 
-
----
-
-##  Архитектура
-
-
-📦 container-scheduler-sim
-├── 📁 core               # основная логика
-│   ├── scheduler.py      # главный планировщик
-│   └── validator.py      # проверка входных данных
-├── 📁 algorithms         # алгоритмы размещения
-│   ├── first_fit.py
-│   ├── best_fit.py
-│   └── ffd.py
-├── 📁 models             # модели данных
-│   ├── node.py           # класс Node (cpu, ram)
-│   └── container.py      # класс Container (cpu, ram)
-├── 📁 tests              # модульные тесты
-├── 📁 data               # примеры JSON для тестов
-├── 📁 kubernetes         # манифесты для деплоя в K8s
-├── 📁 terraform          # инфраструктура как код (Yandex Cloud)
-├── 📁 monitoring         # конфиги Prometheus/Grafana
-└── 📁 .github/workflows  # CI/CD пайплайны
-
----
-
-##  Запуск
-
-### Локально
 ```bash
-# Установка зависимостей
-pip install -r requirements.txt
-
-# Запуск с примером данных
-python main.py data/example.json --algorithm first_fit
-
-В Docker
-docker build -t scheduler-sim .
-docker run --rm scheduler-sim data/example.json --algorithm best_fit
-
-В Kubernetes
-kubectl apply -f kubernetes/deployment.yaml
-kubectl apply -f kubernetes/service.yaml
-
----
+docker build -t simulator .
+docker run --rm simulator
+```
